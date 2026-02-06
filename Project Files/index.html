@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Heart Disease Analysis</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* LOCK PAGE */
+body {
+    background: #f5f7fb;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* NAVBAR */
+header {
+    background: #ffffff;
+    padding: 14px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    flex-shrink: 0;
+}
+
+header h2 {
+    color: #2563eb;
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+nav a.active {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+/* MAIN SECTIONS */
+.section {
+    display: none;
+    background: white;
+    margin: 10px 20px;
+    padding: 20px;
+    border-radius: 12px;
+    flex-grow: 1;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* HOME & ABOUT */
+#home, #about {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#home h1 {
+    font-size: 44px;
+    color: #1e3a8a;
+}
+
+#home button {
+    margin-top: 22px;
+    padding: 12px 30px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#home img,
+#about img {
+    width: 45%;
+    max-height: 80%;
+    object-fit: contain;
+}
+
+/* DASHBOARD & STORY */
+.tableau-area {
+    width: 100%;
+    height: 100%;
+}
+
+.tableau-area iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* =========================
+   CONTACT – PERFECT FIT
+========================= */
+.contact-section {
+    padding: 0;
+}
+
+.contact-bg {
+    height: 100%;
+    padding: 30px;
+    background: rgba(37, 99, 235, 0.08);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-card {
+    background: white;
+    width: 100%;
+    max-width: 1100px;
+    height: 100%;
+    border-radius: 12px;
+    padding: 30px 40px;
+    overflow-y: auto;
+}
+
+.contact-card h2 {
+    text-align: center;
+    color: #1e3a8a;
+}
+
+.subtitle {
+    text-align: center;
+    margin: 8px 0 25px;
+    color: #555;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 30px;
+    height: calc(100% - 120px);
+}
+
+.contact-left,
+.contact-right {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.contact-left h3,
+.contact-right h3 {
+    color: #2563eb;
+    margin-top: 16px;
+}
+
+.disclaimer {
+    font-size: 14px;
+    color: #555;
+}
+
+.emergency {
+    margin-top: 20px;
+    background: #eaf1ff;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* FOOTER */
+footer {
+    background: #2563eb;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+</style>
+
+<script>
+function showSection(id, el) {
+    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+
+    const sec = document.getElementById(id);
+    if (id === 'home' || id === 'about') {
+        sec.style.display = 'flex';
+    } else {
+        sec.style.display = 'block';
+    }
+
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    if (el) el.classList.add('active');
+}
+
+window.onload = () => {
+    showSection('home', document.querySelector('nav a'));
+};
+</script>
+</head>
+
+<body>
+
+<header>
+    <h2>Welcome</h2>
+    <nav>
+        <a class="active" onclick="showSection('home',this)">Home</a>
+        <a onclick="showSection('about',this)">About</a>
+        <a onclick="showSection('dashboard',this)">Dashboard</a>
+        <a onclick="showSection('story',this)">Story</a>
+        <a onclick="showSection('contact',this)">Contact</a>
+    </nav>
+</header>
+
+<!-- HOME -->
+<div id="home" class="section">
+    <div>
+        <h1>Heart Disease Analysis</h1>
+        <button onclick="showSection('dashboard', document.querySelectorAll('nav a')[2])">
+            Get Started →
+        </button>
+    </div>
+    <img src="images/analysis.png" alt="Analysis">
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="section">
+    <div>
+        <p>
+            Heart disease is a group of cardiovascular disorders that affect the
+            normal functioning of the heart.
+        </p>
+        <p>
+            Major risk factors include obesity, sedentary lifestyle, and smoking,
+            as reported by the National Heart, Lung and Blood Institute (USA).
+        </p>
+    </div>
+    <img src="images/heart.jpg" alt="Heart">
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="section">
+    <div class="tableau-area">
+        <iframe src="https://public.tableau.com/views/Heart_Disease_Analysis_17694107750940/Dashboard1?:embed=y&:showVizHome=no&:tabs=no"></iframe>
+    </div>
+</div>
+
+<!-- STORY -->
+<div id="story" class="section">
+    <div class="tableau-area">
+        <iframe src="https://public.tableau.com/views/Heart_Disease_Analysis_17694107750940/Story1?:embed=y&:showVizHome=no&:tabs=no"></iframe>
+    </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section contact-section">
+    <div class="contact-bg">
+        <div class="contact-card">
+            <h2>Contact & Support</h2>
+            <p class="subtitle">Healthcare Analytics & Cardiovascular Data Services</p>
+
+            <div class="contact-grid">
+                <div class="contact-left">
+                    <h3>🏥 Healthcare Analytics Center</h3>
+                    <p>Cardiovascular Disease Data & Insights Division</p>
+
+                    <h3>📍 Department</h3>
+                    <p>Population Health & Preventive Analytics</p>
+
+                    <h3>📊 Services</h3>
+                    <p>Heart disease trend analysis, lifestyle risk assessment, and interactive dashboards.</p>
+
+                    <h3>⚠ Medical Disclaimer</h3>
+                    <p class="disclaimer">
+                        This platform provides analytical insights only and does not replace professional medical advice.
+                    </p>
+                </div>
+
+                <div class="contact-right">
+                    <h3>Support Information</h3>
+                    <p><strong>Email:</strong> healthcare.analytics@support.org</p>
+                    <p><strong>Phone:</strong> +91 1800-XXX-XXXX</p>
+                    <p><strong>Working Hours:</strong><br>Mon – Fri (09:00 AM – 05:00 PM)</p>
+
+                    <div class="emergency">
+                        🚑 For emergencies, contact the nearest certified healthcare facility immediately.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    Heart Disease Analysis | Tableau Dashboard Project
+</footer>
+
+</body>
+</html>
